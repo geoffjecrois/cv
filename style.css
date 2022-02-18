@@ -71,7 +71,7 @@ Components
   position: absolute;
   justify-content: start;
   width: 100vw;
-  height: 90vh;
+  height: 50vh;
   margin: 0;
   background: var(--rougeantifa);
   z-index: 999;
