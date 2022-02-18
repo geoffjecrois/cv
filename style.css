@@ -1,10 +1,496 @@
+/* =========
+Global style
+===========*/
+:root {
+  --rougeantifa: tomato;
+}
 body {
+  margin: 0;
+}
+
+/* =========
+    Typo
+===========*/
+
+h1 {
+  color: rgb(230, 230, 230);
+  padding: 15px;
+  font-family: "Work Sans", sans-serif;
+  font-weight: 700;
+  font-size: 4em;
+}
+
+h2 {
+  font-family: "Work Sans", sans-serif;
+  font-weight: 700;
+  color: rgb(230, 230, 230);
+}
+
+p {
+  font-family: "Work Sans", sans-serif;
+  font-weight: 200;
+  color: rgb(230, 230, 230);
+}
+
+q {
+  display: block;
+  position: relative;
+  font-family: "Work Sans", sans-serif;
+  font-weight: 200;
+  font-size: 40px;
+  line-height: 1.25em;
+  color: rgb(230, 230, 230);
+  text-shadow: 1px 1px 4px grey;
+  margin-bottom: 10px;
+}
+
+cite {
   position: absolute;
+  margin: auto;
+  right: 0;
+  font-family: "Work Sans", sans-serif;
+  font-size: 1em;
+  font-weight: 700;
+  font-style: italic;
+  color: rgb(230, 230, 230);
+  text-shadow: 2px 2px 2px black;
+}
+
+label {
+  font-family: "Work Sans", sans-serif;
+  font-weight: 200;
+  color: rgb(230, 230, 230);
+}
+
+/* =========
+Components 
+===========*/
+
+.nav-toggle:checked ~ nav {
+  transform: scale(1, 1);
+  position: absolute;
+  justify-content: start;
+  width: 100vw;
+  height: 90vh;
+  margin: 0;
+  background: var(--rougeantifa);
+  z-index: 999;
+  transition: 200ms transform ease-out;
+  transform-origin: bottom;
+}
+
+.nav-toggle:checked ~ nav a {
+  color: black;
+  font-size: 2em;
+  text-decoration: underline;
+  line-height: 3em;
+}
+
+.nav-toggle {
+  display: none;
+}
+
+.nav-toggle-label {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+}
+
+span {
+  position: absolute;
+  margin: auto;
+  height: 3px;
+  width: 25px;
+  background: white;
+  border-radius: 2px;
+  transition: 300ms transform ease-in;
+}
+
+span:nth-child(2) {
+  position: absolute;
+  margin: auto;
+  top: 11px;
+}
+
+span:nth-child(3) {
+  position: absolute;
+  margin: auto;
+  bottom: 10px;
+}
+
+.nav-toggle:checked ~ div span:nth-child(2) {
+  transform: rotate(45deg) translate(5px, 6px);
+  background: var(--rougeantifa);
+}
+
+.nav-toggle:checked ~ div span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -6px);
+  background: var(--rougeantifa);
+}
+
+.nav-toggle:checked ~ div span:nth-child(1) {
+  transform: scale(0);
+}
+
+/* scrolldown arrows */
+.scrolldown {
+  height: 100px;
+  width: 100px;
+}
+
+.arrow {
+  width: 30px;
+  height: 30px;
+  border: 5px solid #fff;
+  border-left: 0;
+  border-top: 0;
+  transform: rotate(45deg);
+  animation: scrolldown 1000ms infinite;
+  animation-timing-function: ease-in;
+}
+
+.one {
+  margin: auto;
+}
+
+.two {
+  position: relative;
+  margin: auto;
+  top: -19px;
+  animation-delay: 333ms;
+}
+
+.three {
+  position: relative;
+  margin: auto;
+  top: -38px;
+  animation-delay: 666ms;
+}
+
+@keyframes scrolldown {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* =========
+Layout
+===========*/
+
+.container {
   width: 100vw;
   height: 100vh;
-  overflow: hidden;
-  background: url(data:image/png;base64,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),
-    radial-gradient(ellipse at center, #ffeeac 0%, #5b2c15 100%);
-
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
 }
+
+.page {
+  position: relative;
+  height: 100vh;
+  scroll-snap-align: center;
+  overflow: visible;
+}
+
+header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-right: 2em;
+  width: 100vw;
+  height: 40px;
+  position: relative;
+}
+
+#top_line {
+  width: 95%;
+  height: 2px;
+  background-color: rgb(230, 230, 230);
+  position: absolute;
+  margin: auto;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+.page1 {
+  position: relative;
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+    url(./src/manif.jpeg);
+}
+
+.page2-text {
+  position: absolute;
+  margin: auto;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.accueil {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+}
+
+.title {
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: 35vh;
+  width: 50vw;
+  bottom: 0;
+  left: 0;
+}
+
+.title-text {
+  height: 100%;
+}
+
+aside {
+  position: absolute;
+  margin: auto;
+  z-index: 999;
+  padding: 5px;
+  top: 0;
+  bottom: 0;
+  right: 5vw;
+  height: 20vh;
+  width: 40vw;
+}
+
+/* big quotation mark */
+q::before {
+  content: "❝";
+  position: absolute;
+  color: var(--rougeantifa);
+  text-shadow: none;
+  opacity: 0.9;
+  font-size: 4em;
+  left: -110px;
+}
+
+.nav-toggle-btn {
+  display: none;
+}
+
+nav {
+  width: 100%;
+  height: 100px;
+  position: absolute;
+  margin: auto;
+  bottom: 0;
+  display: flex;
+  justify-content: end;
+}
+
+nav ul {
+  margin: 20px;
+  list-style-type: none;
+}
+
+nav ul a {
+  position: relative;
+  text-decoration: none;
+  font-family: "Work Sans", sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  color: rgb(230, 230, 230);
+}
+
+nav a::before {
+  content: "";
+  position: absolute;
+  margin: auto;
+  bottom: 0;
+  height: 3px;
+  width: 100%;
+  background-color: var(--rougeantifa);
+  transition: transform 300ms ease-in;
+  transform: scaleX(0.2);
+  transform-origin: left;
+}
+
+nav a:hover::before {
+  transform: scale(1);
+}
+
+.page2 {
+  position: relative;
+  background: url(./src/strasbourgmap.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: space-around;
+}
+
+.page2-left {
+  position: relative;
+  padding: 20px;
+  width: 40%;
+  overflow: hidden;
+}
+
+.page2-right {
+  position: relative;
+  padding: 20px;
+  width: 40%;
+  overflow: hidden;
+}
+
+.form-mail {
+  position: absolute;
+  margin: auto;
+  width: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+input {
+  border-radius: 5px;
+  width: 50%;
+  margin: 10px 0px 10px 0px;
+  background-color: rgb(230, 230, 230, 0.3);
+  border: none;
+}
+
+textarea {
+  border-radius: 5px;
+  height: 25vh;
+  width: 75%;
+  margin: 10px 0px 10px 0px;
+  background-color: rgb(230, 230, 230, 0.3);
+  border: none;
+}
+
+textarea:focus,
+input:focus {
+  background-color: rgb(230, 230, 230, 0.6);
+}
+
+.blabla:hover {
+  text-decoration: underline;
+}
+
+.accueil h2:hover {
+  color: red;
+}
+
+.page3 {
+  display: none;
+}
+
+/* ========
+  Media queries
+========*/
+
+@media screen and (max-width: 780px) {
+  .nav-toggle-label {
+    transform: scale(1);
   }
+  nav {
+    transform: scale(1, 0);
+  }
+
+  q {
+    font-size: 20px;
+  }
+  h1 {
+    font-size: 2em;
+  }
+  .page1 {
+    background-position: center 25%;
+  }
+  .scrolldown {
+    transform: scale(0.4);
+  }
+  .title {
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100vw;
+  }
+  .title-text {
+    height: 50%;
+  }
+  aside {
+    position: absolute;
+    margin: auto;
+    right: 0;
+    bottom: 55%;
+  }
+  q::before {
+    left: -55px;
+  }
+  cite {
+    font-size: 0.8em;
+    margin-right: 10px;
+  }
+
+  .nav-toggle-btn {
+    display: block;
+    position: fixed;
+    margin: 0;
+    top: 0;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    z-index: 999;
+  }
+
+  .page2-left {
+    display: none;
+  }
+
+  .page2-right {
+    position: relative;
+    background-position: right;
+    bottom: 0;
+    padding: 20px;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .page2-text {
+    width: 90vw;
+  }
+
+  p {
+    font-size: 0.85em;
+    text-align: justify;
+  }
+  .page3 {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background: url(./src/strasbourgmap.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh;
+    width: 100vw;
+  }
+  form {
+    margin: 20px;
+  }
+
+  h2 {
+    color: var(--rougeantifa);
+    margin: 0;
+    padding: 20px;
+  }
+}
